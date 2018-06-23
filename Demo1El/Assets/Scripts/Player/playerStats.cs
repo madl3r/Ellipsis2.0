@@ -217,8 +217,8 @@ public class playerStats : MonoBehaviour {
 		}
 		//Else if we're on the shopEnter line, and it's locked and we have at least 1 key... then unlock it!
 		else if (theWorld.GetComponent<World>().getCurrentLine().tag == "shopEnterLine" &&
-		         theWorld.GetComponent<World>().getCurrentLine().GetComponent<shopEnterLineScript>().getIsLocked() &&
-		         keys > 0)
+				 theWorld.GetComponent<World>().getCurrentLine().GetComponent<shopEnterLineScript>().getIsLocked() &&
+				 keys > 0)
 		{
 			spendKey();
 			theWorld.GetComponent<World>().getCurrentLine().GetComponent<shopEnterLineScript>().setIsLocked(false);

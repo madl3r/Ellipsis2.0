@@ -23,8 +23,8 @@ public class pauseMenuGUI : MonoBehaviour {
 	void Start () {
 		optionsMenu = false;
 		menuAreaNormalized = new Rect(menuArea.x * Screen.width * 0.5f - (menuArea.width * 0.5f),
-		                              menuArea.y * Screen.height * 0.5f - (menuArea.height * 0.5f), 
-		                              menuArea.width, menuArea.height);
+									  menuArea.y * Screen.height * 0.5f - (menuArea.height * 0.5f), 
+									  menuArea.width, menuArea.height);
 	}
 	
 	// Update is called once per frame

@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour {
 	public GameObject optionsMenuObject;
 	public Button musicButton, soundFXButton, backButton;
 
-	// Use this for initialization
 	void Start () {
 		playButton.onClick.AddListener(Play);
 		optionsButton.onClick.AddListener(Options);
@@ -25,7 +24,6 @@ public class MainMenu : MonoBehaviour {
 		playButton.Select();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}

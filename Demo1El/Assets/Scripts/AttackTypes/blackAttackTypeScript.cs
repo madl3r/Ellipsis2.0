@@ -9,7 +9,7 @@ public class blackAttackTypeScript : attackTypeScript {
 		defaultAttackSpeed = 4.0f;
 		knockBackPos = -6.1f;
 		knockBackSpeed = -12.5f;
-		color = new Color(0f, 0f, 0f);
+		color = new Color(1f, 1f, 1f);
 		base.Start();
 	}	
 	

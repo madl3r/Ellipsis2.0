@@ -163,9 +163,10 @@ public class Movement : MonoBehaviour {
 		}
 
 		//For using potions now! (not yet implemented)
-		if (Input.GetKeyDown("left") && numInQ == 0)
+        if (Input.GetKeyDown("left") && numInQ == 0 && origNumInQ == currentFirst)
 		{
-			gameObject.GetComponent<playerStats>().usePotion();
+            //gameObject.GetComponent<playerStats>().usePotion();
+            switchLeft(0);
 		}
 
 		//Switches the player to the right

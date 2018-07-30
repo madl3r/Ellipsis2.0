@@ -12,6 +12,7 @@ public class playerStats : MonoBehaviour {
 	public static GameObject keyUI;
 	public static GameObject coinUI;
 	public static GameObject theWorld;
+	public static GameObject mainCamera;
 
 	private static int levelNumber = 0;
 	private static string nextLvl;
@@ -65,6 +66,7 @@ public class playerStats : MonoBehaviour {
 		keyUI = GameObject.Find("keyDisplay");
 		coinUI = GameObject.Find("coinDisplay");
 		theWorld = GameObject.FindGameObjectWithTag("theWorld");
+		mainCamera = GameObject.Find("Camera");
 
 		//starting outside of a round
 		isInRound = false;
@@ -138,11 +140,15 @@ public class playerStats : MonoBehaviour {
 			}
 			//otherwise proceed as normal
 			else
+			{
+				mainCamera.GetComponent<CameraBehavior>().InvokeShake(dmg);
 				hp -= dmg;
+			}
 
 		}
 			//Redisplay the HP with new values.
 		HPUI.GetComponent<displayHP>().showHearts(hp, maxHP);
+
 
 		//if HP is less than or = zero... then gg
 		if (hp <= 0)

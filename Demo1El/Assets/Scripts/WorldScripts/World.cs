@@ -415,6 +415,7 @@ public class World : MonoBehaviour {
 
 	public void enemyKilled()
 	{
+		theCamera.GetComponent<CameraBehavior>().InvokeShake(4);
 		enemiesKilledThisRound++;
 	}
 

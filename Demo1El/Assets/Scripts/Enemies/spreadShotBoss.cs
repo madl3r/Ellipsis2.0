@@ -20,6 +20,7 @@ public class spreadShotBoss : BaseEnemy {
 		theYPos = transform.position.y;
 		hp = 20;
 		dmg = 1;
+        alive = 1;
 		prevMoveTime = Time.time;
 		prevShotTime = Time.time;
 
@@ -93,9 +94,10 @@ public class spreadShotBoss : BaseEnemy {
 	{
 		hp -= dmg;
 		
-		if (hp <= 0)
+		if (hp <= 0 && alive == 1)
 		{
-			//Tell the world that you died.
+            //Tell the world that you died.
+            alive = 0;
 			dahWorld.GetComponent<World>().finishBossRound();
 			Destroy(gameObject);
 		}

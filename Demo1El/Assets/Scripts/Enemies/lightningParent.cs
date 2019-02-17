@@ -32,23 +32,35 @@ public class lightningParent : BaseEnemy {
 	{
 		//Should maybe also choose a new line to go onto.
 		transform.position = new Vector2 (Random.Range(10.0f, 12.0f), transform.position.y);
-		Debug.Log("Transform x is now: " + transform.position.x);
 	}
 
-	public void lightningDie(Vector2 deadPos)
+    protected override void takeDamage(int dmg)
+    {
+        anim.SetTrigger("TakeDamage");
+        hp -= dmg;
+
+        if (hp <= 0)
+        {
+            //Tell the world that you died. Don't tell the world we died because we spawn another one.
+            //dahWorld.GetComponent<World>().enemyKilled();
+            Destroy(gameObject);
+        }
+    }
+
+    public void lightningDie(Vector2 deadPos)
 	{
-		//Don't count the death, because this enemy spawns another one after its death.
-		if (deadPos.y > 0)
+        //Don't count the death, because this enemy spawns another one after its death.
+        if (deadPos.y > 0)
 		{
 			//spawn an basic shooty enemy at -4y
-			GameObject e = Instantiate(enemySpawn, new Vector2(deadPos.x, -4.0f), Quaternion.identity) as GameObject;
+			GameObject e = Instantiate(enemySpawn, new Vector2(deadPos.x - 1.0f, -4.0f), Quaternion.identity) as GameObject;
 			e.GetComponent<BaseEnemy>().isWorldSpawned(false);
 			e.GetComponent<BaseEnemy>().setTheWorld(dahWorld);
 		}
 		else
 		{
 			//spawn a basic shooty at +4y
-			GameObject e = Instantiate(enemySpawn, new Vector2(deadPos.x, 4.0f), Quaternion.identity) as GameObject;
+			GameObject e = Instantiate(enemySpawn, new Vector2(deadPos.x - 1.0f, 4.0f), Quaternion.identity) as GameObject;
 			e.GetComponent<BaseEnemy>().isWorldSpawned(false);
 			e.GetComponent<BaseEnemy>().setTheWorld(dahWorld);
 		}

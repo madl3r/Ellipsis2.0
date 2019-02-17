@@ -7,6 +7,7 @@ public class BaseEnemy : MonoBehaviour {
 	protected int dmg;
 	protected bool worldSpawned = false;
 	protected GameObject dahWorld;
+    protected int alive;
 
 	protected Animator anim;
 
@@ -40,9 +41,10 @@ public class BaseEnemy : MonoBehaviour {
 		anim.SetTrigger("TakeDamage");
 		hp -= dmg;
 		
-		if (hp <= 0)
+		if (hp <= 0 && alive == 1)
 		{
-			//Tell the world that you died.
+            //Tell the world that you died.
+            alive = 0;
 			dahWorld.GetComponent<World>().enemyKilled();
 			Destroy(gameObject);
 		}

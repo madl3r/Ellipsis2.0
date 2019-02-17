@@ -204,11 +204,11 @@ public class World : MonoBehaviour {
 		}
 	}
 
-
-
 	public void finishRound()
 	{
 		enemiesKilledThisRound = 0; //So that it only goes into this once
+        enemiesSpawnedThisRound = 0;
+
 		//Make sure that the enemies are all destroyed
 		foreach (GameObject leftovers in currentRoundEnemies)
 		{
@@ -327,8 +327,9 @@ public class World : MonoBehaviour {
 
 	void newRound()
 	{
-		//Letting players know that the round has begun
-//		GameObject[] thePlayers = GameObject.FindGameObjectsWithTag("Player");
+        //Letting players know that the round has begun
+        //		GameObject[] thePlayers = GameObject.FindGameObjectsWithTag("Player");
+        enemiesKilledThisRound = 0;
 		foreach (GameObject player in thePlayers)
 		{
 			player.BroadcastMessage("setRoundStatus", true);
@@ -368,7 +369,7 @@ public class World : MonoBehaviour {
 			e.GetComponent<BaseEnemy>().isWorldSpawned(true);
 			currentRoundEnemies[i] = e;
 		}
-	}
+    }
 
 	void newBossRound()
 	{

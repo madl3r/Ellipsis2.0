@@ -18,6 +18,7 @@ public class HammerEnemy : BaseEnemy {
 		timeBtwnAttacks = 0.5f;
 		hp = 4;
 		dmg = 2;
+        alive = 1;
 		GetComponent<Rigidbody2D>().velocity = new Vector2 (Random.Range(-12.0f, -4.99f), 0);
 	
 		anim = GetComponent<Animator>();
@@ -41,12 +42,14 @@ public class HammerEnemy : BaseEnemy {
 		
 		hp -= dmg;
 		anim.SetTrigger("TakingDamage");
-		//knockback
-		transform.position = new Vector2(transform.position.x + 0.2f, transform.position.y);
-
-		if (hp <= 0)
+        //knockback
+        transform.position = new Vector2(transform.position.x + 0.2f, transform.position.y);
+        Debug.Log("HAMMER TAKING DAMAGE!!!");
+        if (hp <= 0 && alive == 1)
 		{
-			//Tell the world that you died.
+            Debug.Log("HAMMER DIEING!!!");
+            //Tell the world that you died.
+            alive = 0;
 			dahWorld.GetComponent<World>().enemyKilled();
 			Destroy(gameObject);
 		}

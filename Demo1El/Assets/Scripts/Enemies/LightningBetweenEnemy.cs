@@ -24,12 +24,10 @@ public class LightningBetweenEnemy : BaseEnemy {
 
 	protected void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("DIS SHIT IS GETTIN HIT");
 		//if we're hitting a player, and we haven't recently damaged them then deal damage.
 		if (other.gameObject.tag == "Player" && !recentlyDamaged)
 		{
-			Debug.Log("lightning hit");
-			Debug.Log("Hitting player");
+			
 			recentlyDamaged = true;
 			other.gameObject.SendMessage("takeDamage", dmg);
 			//wait half a second before being able to deal damage again
@@ -37,11 +35,7 @@ public class LightningBetweenEnemy : BaseEnemy {
 			attackTime = Time.time;
 			//Make noise and some effect
 		}
-//		if (other.gameObject.tag == "bullet")
-//		{
-//			//Debug.Log("HIT BY A BULLET");
-//			other.gameObject.SendMessage("dealDamage", gameObject);
-//		}
+
 	}
 
 	protected override void OffCameraLeft()

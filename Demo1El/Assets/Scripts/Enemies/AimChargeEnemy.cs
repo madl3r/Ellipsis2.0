@@ -34,6 +34,7 @@ public class AimChargeEnemy : BaseEnemy {
 		timeBtwnDamage = 0.5f;
 		hp = 3;
 		dmg = 2;
+        alive = 1;
 		prevShotTime = Time.time;
 		attacking = false;
 

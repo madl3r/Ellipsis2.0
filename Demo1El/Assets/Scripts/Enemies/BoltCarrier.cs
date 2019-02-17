@@ -27,14 +27,11 @@ public class BoltCarrier : BaseEnemy {
 	//(Maybe have the remaining player turn into a basicShootyEnemy?
 	protected override void takeDamage(int dmg)
 	{
-		Debug.Log("taking DAH DAAAMMMMAGE");
 		hp -= dmg;
 		
 		if (hp <= 0)
 		{
-			//Tell the world that you died.
-			//theParent.GetComponent
-			Debug.Log("KILLING US");
+
 			theParent.GetComponent<lightningParent>().lightningDie(transform.position);
 			Destroy(gameObject);
 		}
@@ -52,7 +49,6 @@ public class BoltCarrier : BaseEnemy {
 		//if we're hitting a player, and we haven't recently damaged them then deal damage.
 		if (other.gameObject.tag == "Player" && !recentlyDamaged)
 		{
-			Debug.Log("Hitting player");
 			recentlyDamaged = true;
 			other.gameObject.SendMessage("takeDamage", dmg);
 			//wait half a second before being able to deal damage again
@@ -62,8 +58,6 @@ public class BoltCarrier : BaseEnemy {
 		}
 		if (other.gameObject.tag == "bullet")
 		{
-			Debug.Log("Carrier hit!");
-			//Debug.Log("HIT BY A BULLET");
 			other.gameObject.SendMessage("dealDamage", gameObject);
 		}
 	}

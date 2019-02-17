@@ -18,6 +18,7 @@ public class AimShootyEnemy : BaseEnemy {
 
 		hp = 4;
 		dmg = 1;
+        alive = 1;
 		prevShotTime = Time.time;
 
 		//Making so that we're looking at the -x direction instead of the Z direction.

@@ -22,6 +22,7 @@ public class BasicShootyEnemy : BaseEnemy {
 		theYPos = transform.position.y;
 		hp = 2;
 		dmg = 1;
+        alive = 1;
 		prevMoveTime = Time.time;
 		prevShotTime = Time.time;
 

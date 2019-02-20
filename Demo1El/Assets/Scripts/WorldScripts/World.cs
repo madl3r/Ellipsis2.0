@@ -132,7 +132,9 @@ public class World : MonoBehaviour {
 		{
 			finishRound();
 		}
-
+        
+        /* Major change of timeBtwnRound and timeLeftBtwnRound, maybe keep counter for now, but need to do more
+         * with the scrolling stars and need to add some wait time for enemies after they spawn*/
 		//Reset this variable whenever the player goes into the update area
 		if (timeLeftBtwnRound <= 0 && currentLine.tag == "lines")
 		{
@@ -202,6 +204,7 @@ public class World : MonoBehaviour {
 			total += line.transform.position.y;
 			cameraYPos = total / simLines.Length;
 		}
+        theCamera.BroadcastMessage("UpdateYPosition", cameraYPos);
 	}
 
 	public void finishRound()

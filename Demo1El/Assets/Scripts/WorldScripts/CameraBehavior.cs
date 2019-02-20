@@ -28,7 +28,8 @@ public class CameraBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//checking if in boss area, and changing cameraX Y Z pos depending on whether or not we're there
+
 	}
 
 
@@ -57,4 +58,11 @@ public class CameraBehavior : MonoBehaviour {
 		CancelInvoke("CameraShake");
 		mainCamera.transform.position = camCenterPos;
 	}
+
+    public void UpdateYPosition(float newYPos)
+    {
+        cameraYPos = newYPos;
+        camCenterPos = new Vector3(cameraXPos, cameraYPos, cameraZPos);
+    }
+
 }

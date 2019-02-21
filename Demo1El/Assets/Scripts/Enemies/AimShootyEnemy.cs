@@ -6,6 +6,7 @@ public class AimShootyEnemy : BaseEnemy {
 	public GameObject attackType;
 	private float timeBetweenShot;
 	private float prevShotTime;
+    private float spawnAndPause;
 
 	private GameObject playerToLookAt;
 	private Vector3 eulerAngleOffset;
@@ -19,7 +20,8 @@ public class AimShootyEnemy : BaseEnemy {
 		hp = 4;
 		dmg = 1;
         alive = 1;
-		prevShotTime = Time.time;
+		prevShotTime = Time.time + 2; // +3 is to give player chance to register enemy spawning
+        spawnAndPause = Time.time + 1;
 
 		//Making so that we're looking at the -x direction instead of the Z direction.
 		eulerAngleOffset = new Vector3(0, 90, 0);
@@ -33,14 +35,14 @@ public class AimShootyEnemy : BaseEnemy {
 	void Update () {
 
 		//Look at the player
-		if (playerToLookAt != null)
+		if (playerToLookAt != null && Time.time > spawnAndPause)
 		{
 			//transform.LookAt(playerToLookAt.transform.position);
 			transform.LookAt(new Vector2 (-6.0f, playerToLookAt.transform.position.y));
 			transform.Rotate(eulerAngleOffset, Space.Self);
 		}
 
-		//Every now and again move
+		//Every now and again shoot
 		if (Time.time - prevShotTime > timeBetweenShot)
 		{
 			attack ();

@@ -6,6 +6,8 @@ public class HammerEnemy : BaseEnemy {
 	private bool recentlyDamaged;
 	private float attackTime;
 	private float timeBtwnAttacks;
+    private float startPause;
+    private bool started;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -19,7 +21,8 @@ public class HammerEnemy : BaseEnemy {
 		hp = 4;
 		dmg = 2;
         alive = 1;
-		GetComponent<Rigidbody2D>().velocity = new Vector2 (Random.Range(-12.0f, -4.99f), 0);
+        started = false;
+        startPause = Time.time + 2;
 	
 		anim = GetComponent<Animator>();
 	}
@@ -28,10 +31,15 @@ public class HammerEnemy : BaseEnemy {
 	void Update () {
 		if (recentlyDamaged && (Time.time - attackTime) > timeBtwnAttacks)
 			recentlyDamaged = false;
+        
+        if (!started && Time.time > startPause)
+        { 
+            GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-12.0f, -4.99f), 0);
+            started = true;
+        }
+    }
 
-	}
-
-	protected override void OffCameraLeft()
+    protected override void OffCameraLeft()
 	{
 		//Should maybe also choose a new line to go onto.
 		transform.position = new Vector2 (11.0f, transform.position.y);
@@ -44,10 +52,8 @@ public class HammerEnemy : BaseEnemy {
 		anim.SetTrigger("TakingDamage");
         //knockback
         transform.position = new Vector2(transform.position.x + 0.2f, transform.position.y);
-        Debug.Log("HAMMER TAKING DAMAGE!!!");
         if (hp <= 0 && alive == 1)
 		{
-            Debug.Log("HAMMER DIEING!!!");
             //Tell the world that you died.
             alive = 0;
 			dahWorld.GetComponent<World>().enemyKilled();
@@ -57,9 +63,6 @@ public class HammerEnemy : BaseEnemy {
 
 	protected void OnTriggerEnter2D(Collider2D other)
 	{
-
-//		Debug.Log("HAMMER ~~~~~~~ HIT");
-
 		//if we're hitting a player, and we haven't recently damaged them then deal damage.
 		if (other.gameObject.tag == "Player" && !recentlyDamaged)
 		{
@@ -71,12 +74,6 @@ public class HammerEnemy : BaseEnemy {
 			attackTime = Time.time;
 			//Make noise and some effect
 		}
-//		if (other.gameObject.tag == "bullet")
-//		{
-//			Debug.Log("HAMMER HIT BY BULLET");
-//			//Debug.Log("HIT BY A BULLET");
-//			other.gameObject.SendMessage("dealDamage", gameObject);
-//		}
 	}
 	
 

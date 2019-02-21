@@ -23,8 +23,8 @@ public class BasicShootyEnemy : BaseEnemy {
 		hp = 2;
 		dmg = 1;
         alive = 1;
-		prevMoveTime = Time.time;
-		prevShotTime = Time.time;
+		prevMoveTime = Time.time + 2;
+		prevShotTime = Time.time + 2;
 
 		anim = GetComponent<Animator>();
 	}

@@ -11,7 +11,8 @@ public class AimChargeEnemy : BaseEnemy {
 	//Choosing to attack vars
 	private float timeBtwnAttacks;
 	private float prevShotTime;
-	private bool attacking;
+    private float spawnAndPause;
+    private bool attacking;
 	private Vector2 startingPos;
 
 	//Look at vars
@@ -35,8 +36,9 @@ public class AimChargeEnemy : BaseEnemy {
 		hp = 3;
 		dmg = 2;
         alive = 1;
-		prevShotTime = Time.time;
-		attacking = false;
+        prevShotTime = Time.time + 2; // +3 is to give player chance to register enemy spawning
+        spawnAndPause = Time.time + 1;
+        attacking = false;
 
 		//Making so that we're looking at the -x direction instead of the Z direction.
 		eulerAngleOffset = new Vector3(0, 90, 0);
@@ -55,7 +57,7 @@ public class AimChargeEnemy : BaseEnemy {
 			recentlyDamaged = false;
 
 		//Look at the player
-		if (playerToLookAt != null && !attacking)
+		if (playerToLookAt != null && !attacking && Time.time > spawnAndPause)
 		{
 			//transform.LookAt(playerToLookAt.transform.position);
 			transform.LookAt(new Vector2 (-6.0f, playerToLookAt.transform.position.y));

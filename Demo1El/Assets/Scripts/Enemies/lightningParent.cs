@@ -9,24 +9,32 @@ public class lightningParent : BaseEnemy {
 	public GameObject carrier2;
 	public GameObject lightning;
 	private float speed;
+    private float startPause;
+    private bool started;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		if (worldSpawned)
 			transform.position = new Vector2(Random.Range(8.0f, 11.0f), 0);
 
 		speed = Random.Range(-3.0f, -4.5f);
-		carrier1.GetComponent<Rigidbody2D>().velocity = new Vector2 (speed, 0);
-		carrier2.GetComponent<Rigidbody2D>().velocity = new Vector2 (speed, 0);
-		lightning.GetComponent<Rigidbody2D>().velocity = new Vector2 (speed, 0);
+        started = false;
+        startPause = Time.time + 2;
+        
 
 		//rigidbody2D.velocity = new Vector2 (Random.Range(-3.0f, -5.0f), 0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (!started && Time.time > startPause)
+        {
+            carrier1.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
+            carrier2.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
+            lightning.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
+            started = true;
+        }
+    }
 
 	protected override void OffCameraLeft()
 	{

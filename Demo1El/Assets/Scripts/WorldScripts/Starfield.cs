@@ -22,6 +22,7 @@ public class Starfield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //setting up individual stars randomly in the particle system
         for (int i = 0; i < MaxStars; i++)
         {
             Vector3 pos = Stars[i].position + transform.position;
@@ -30,26 +31,7 @@ public class Starfield : MonoBehaviour
             {
                 Stars[i].position = new Vector3(pos.x + FieldWidth, pos.y, pos.z);
             }
-            /*if (pos.x < (theCamera.transform.position.x - xOffset))
-            {
-                pos.x += FieldWidth;
-            }
-            else if (pos.x > (theCamera.transform.position.x + xOffset))
-            {
-                pos.x -= FieldWidth;
-            }
-
-            if (pos.y < (theCamera.transform.position.y - yOffset))
-            {
-                pos.y += FieldHeight;
-            }
-            else if (pos.y > (theCamera.transform.position.y + yOffset))
-            {
-                pos.y -= FieldHeight;
-            }
-
-            Stars[i].position = pos - transform.position;
-            */
+           
         }
         Particles.SetParticles(Stars, Stars.Length);
         

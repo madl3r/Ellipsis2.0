@@ -21,8 +21,8 @@ public class spreadShotBoss : BaseEnemy {
 		hp = 20;
 		dmg = 1;
         alive = 1;
-		prevMoveTime = Time.time;
-		prevShotTime = Time.time;
+		prevMoveTime = Time.time + 3;
+		prevShotTime = Time.time + 3;
 
 	}
 	
